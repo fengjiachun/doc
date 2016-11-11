@@ -1,4 +1,4 @@
-<p>最近再次翻netty和disrupt的源码, 发现一些地方使用AtomicXXX.lazySet()/unsafe.putOrderedXXX系列, 以前一直没有注意lazySet这个方法, 仔细研究一下发现很有意思</p>
+<p>最近再次翻netty和disruptor的源码, 发现一些地方使用AtomicXXX.lazySet()/unsafe.putOrderedXXX系列, 以前一直没有注意lazySet这个方法, 仔细研究一下发现很有意思</p>
 
 <p>我们拿AtomicReferenceFieldUpdater的set()和lazySet()作比较, 其他AtomicXXX类似</p>
 
@@ -112,9 +112,9 @@ public class LazySetTest {
 
 <p>查询IA32手册可知道, lock addl $0x0,(%rsp)其实就是StoreLoad屏障了, 而lazySet()确实没生成StoreLoad屏障</p>
 
-<p>我想知道JIT除了将方法内联, 相同代码生成不同指令是怎么做到的, 哪位大神可以指点下, 求解惑</p>
+<p>我想知道JIT除了将方法内联, 相同代码生成不同指令是怎么做到的</p>
 
-后续调查-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
 http://hg.openjdk.java.net/jdk7u/jdk7u/hotspot/file/6e9aa487055f/src/share/vm/classfile/vmSymbols.hpp
 ![putObjectVolatile](http://img1.tbcdn.cn/L1/461/1/2acc564efb86dedcc9a91efbf7bdef5240a78abf)
 
